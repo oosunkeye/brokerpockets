@@ -50,13 +50,7 @@ export default function ColorTextFields() {
 		console.log(value);
 	};
 
-	//DELETE LATER
-	if (selectedAddress) {
-		// console.log("lat: ", coordinates.lat);
-		// console.log("lng: ", coordinates.lng);
-	}
 
-	const [reload, setReload] = useState("false");
 
 	const handleChange = (address) => {
 		setAddress(address);
