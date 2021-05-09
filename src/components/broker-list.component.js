@@ -52,7 +52,7 @@ export default function CustomizedTables({ pTitle }) {
 	};
 
 	const _handleEdit = (id) => {
-		console.log(id);
+		// console.log(id);
 	};
 
 	useEffect(() => {
