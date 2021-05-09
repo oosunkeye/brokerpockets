@@ -23,13 +23,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const params = new URLSearchParams(window.location.search);
-const userid = params.get("userid");
-
 export default function ColorTextFields() {
+	const [userid, setUserID] = useState("");
 	useEffect(() => {
+		const params = new URLSearchParams(window.location.search);
+		let user = params.get("userid");
+		setUserID(user);
 		axios
-			.get("https://brokerpocket.herokuapp.com/brokers/" + userid)
+			.get("https://brokerpocket.herokuapp.com/brokers/" + user)
 			.then((response) => {
 				// setDatas(response.data);
 
