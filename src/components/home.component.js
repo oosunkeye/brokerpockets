@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
@@ -32,6 +32,7 @@ export default function ColorTextFields() {
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [address, setAddress] = useState("");
+	const [selectedAddress, setSelectedAddress] = useState(false);
 
 	const [addressAuto, setAddressAuto] = React.useState("");
 	const [coordinates, setCoordinates] = React.useState({
@@ -45,12 +46,23 @@ export default function ColorTextFields() {
 		setAddressAuto(value);
 		setCoordinates(latLng);
 		setAddress(value);
+		setSelectedAddress(true);
+		console.log(value);
 	};
+
+	//DELETE LATER
+	if (selectedAddress) {
+		// console.log("lat: ", coordinates.lat);
+		// console.log("lng: ", coordinates.lng);
+	}
+
+	const [reload, setReload] = useState("false");
 
 	const handleChange = (address) => {
 		setAddress(address);
 	};
 
+	// console.log	("address");
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
@@ -62,6 +74,8 @@ export default function ColorTextFields() {
 		};
 
 		console.log(userInfo);
+
+		window.location = "/brokerlist";
 
 		axios
 			.post("https://brokerpocket.herokuapp.com/brokers/add", userInfo)
@@ -79,10 +93,11 @@ export default function ColorTextFields() {
 					<Grid item xs={6}>
 						<TextField
 							variant="filled"
-							label="Name..."
+							label="Name"
 							color="primary"
 							value={names}
 							onChange={(e) => setNames(e.target.value)}
+							required
 						/>
 						<TextField
 							variant="filled"
@@ -91,6 +106,7 @@ export default function ColorTextFields() {
 							color="primary"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							required
 						/>
 						<TextField
 							variant="filled"
@@ -98,6 +114,7 @@ export default function ColorTextFields() {
 							color="primary"
 							value={phoneNumber}
 							onChange={(e) => setPhoneNumber(e.target.value)}
+							required
 						/>
 						<PlacesAutocomplete
 							value={address}
@@ -115,6 +132,7 @@ export default function ColorTextFields() {
 										variant="filled"
 										label="Address"
 										color="primary"
+										required
 										{...getInputProps({ placeholder: "Type address" })}
 									/>
 
@@ -138,7 +156,7 @@ export default function ColorTextFields() {
 						</PlacesAutocomplete>
 					</Grid>
 				</Grid>
-
+				<div style={{ margin: 10 }}></div>
 				<Grid container justify="center" alignItems="center" spacing={10}>
 					<Grid item xs={3}></Grid>
 					<Grid item xs={3}>
@@ -154,9 +172,14 @@ export default function ColorTextFields() {
 					</Grid>
 					<Grid item xs={3}></Grid>
 				</Grid>
+				<div style={{ margin: 100 }}></div>
 			</form>
 
-			<GoogleMaps lat={coordinates.lat} lng={coordinates.lng} />
+			{selectedAddress && (
+				<>
+					<GoogleMaps lat={coordinates.lat} lng={coordinates.lng} />
+				</>
+			)}
 		</>
 	);
 }
