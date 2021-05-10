@@ -84,7 +84,7 @@ export default function ColorTextFields() {
 				"https://brokerpocket.herokuapp.com/brokers/update/" + userid,
 				userInfo
 			)
-			.then((res) => console.log(res.data));
+			.then((res) => (window.location = "/brokerlist"));
 		// setNames("");
 		// setEmail("");
 	};
@@ -184,5 +184,3 @@ export default function ColorTextFields() {
 		</>
 	);
 }
-
-//WORKING CREATE USER
