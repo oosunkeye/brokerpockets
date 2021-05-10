@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import test from "./test";
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
