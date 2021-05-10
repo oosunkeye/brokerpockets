@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import { Grid, Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-// import Table from "./Table";
+
 import axios from "axios";
 
 import PlacesAutocomplete, {
@@ -50,8 +50,6 @@ export default function ColorTextFields() {
 		console.log(value);
 	};
 
-
-
 	const handleChange = (address) => {
 		setAddress(address);
 	};
@@ -69,11 +67,9 @@ export default function ColorTextFields() {
 
 		console.log(userInfo);
 
-		window.location = "/brokerlist";
-
 		axios
 			.post("https://brokerpocket.herokuapp.com/brokers/add", userInfo)
-			.then((res) => console.log(res.data));
+			.then((res) => (window.location = "/brokerlist"));
 		// setNames("");
 		// setEmail("");
 	};
